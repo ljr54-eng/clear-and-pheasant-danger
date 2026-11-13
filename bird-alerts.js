@@ -18,8 +18,8 @@
   }
   function notify(h) {
     const [label,points]=kinds[h.species]||['bird',0];
-    const who=names[h.hunter]||'A hunter';
-    const message='🪶 '+who+' recorded a '+label+'! '+(points>0?'+':'')+points+' points';
+    const who=(names[h.hunter]||'A hunter')+(h.sharedWith?' & '+(names[h.sharedWith]||'another hunter'):'');
+    const message='🪶 '+who+' recorded a '+label+'! '+(points>0?'+':'')+(h.sharedWith?points/2:points)+' points'+(h.sharedWith?' each':'');
     show(message);
     if(document.visibilityState!=='visible'&&'Notification' in window&&Notification.permission==='granted'){
       try{new Notification('Clear and Pheasant Danger',{body:message,tag:'bird-'+h.id})}catch(e){console.debug('Browser alert unavailable',e)}
@@ -41,7 +41,7 @@
       if(error)throw error;
       const rows=(data||[]).filter(x=>x.payload&&x.payload.id);
       if(!initialized){
-        rows.forEach(x=>seen.add(x.id));
+        rows.forEach(x=>{if(!seen.has(x.id)&&x.payload.time&&Date.now()-new Date(x.payload.time).getTime()<45000)notify(x.payload);seen.add(x.id)});
         initialized=true;store();return;
       }
       
@@ -67,7 +67,7 @@
   });
   document.querySelector('header')?.append(control);
   if('Notification' in window&&Notification.permission==='granted')control.textContent='🔔 Bird alerts on';
-  check();setInterval(check,15000);
+  check();setInterval(check,8000);
   window.addEventListener('online',check);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});
 })();
