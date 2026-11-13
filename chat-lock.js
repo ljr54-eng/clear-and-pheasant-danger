@@ -10,11 +10,13 @@
       select.closest('label')?.remove();
       return;
     }
-    select.replaceChildren(new Option(option.textContent, id, true, true));
+    if (select.options.length === 1 && select.value === id && select.hidden) return;
+    const name = option.textContent;
+    select.replaceChildren(new Option(name, id, true, true));
     select.value = id;
     const label = select.closest('label');
     if (label) {
-      label.textContent = 'Posting as ' + option.textContent;
+      label.textContent = 'Posting as ' + name;
       label.append(select);
       select.hidden = true;
       select.setAttribute('aria-hidden', 'true');
