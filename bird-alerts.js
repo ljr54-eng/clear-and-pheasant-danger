@@ -19,7 +19,7 @@
   function notify(h) {
     const [label,points]=kinds[h.species]||['bird',0];
     const who=names[h.hunter]||'A hunter';
-    const message='🪶 '+who+' recorded '+(label==='hen incident'?'a ':'a ')+label+'! '+(points>0?'+':'')+points+' points';
+    const message='🪶 '+who+' recorded a '+label+'! '+(points>0?'+':'')+points+' points';
     show(message);
     if(document.visibilityState!=='visible'&&'Notification' in window&&Notification.permission==='granted'){
       try{new Notification('Clear and Pheasant Danger',{body:message,tag:'bird-'+h.id})}catch(e){console.debug('Browser alert unavailable',e)}
@@ -37,7 +37,7 @@
         if(!window.supabase)return;
         client=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}});
       }
-      const {data,error}=await client.from('pheasant_2026_events').select('id,payload,deleted_at').eq('kind','harvests').is('deleted_at',null).order('created_at',{ascending:false}).limit(100);
+      const {data,error}=await client.from('pheasant_2026_events').select('id,payload,deleted_at').eq('kind','harvests').is('deleted_at',null).limit(500);
       if(error)throw error;
       const rows=(data||[]).filter(x=>x.payload&&x.payload.id);
       if(!initialized){
