@@ -1,8 +1,8 @@
 /* Bird alerts: foreground toasts, optional browser notifications. */
 (() => {
-  const URL = 'https://hpsjpbxbsisuaoabqydr.supabase.co';
-  const KEY = 'sb_publishable_ThQYFR2WfZH6rpR-kvbfEA_sIZVbBDI';
-  const identityKey = 'pheasant-identity-v2';
+  
+  
+  
   const kinds = {pheasant:['rooster',10],grouse:['grouse',25],other:['legal game',20],hen:['hen incident',-15],unrecovered:['unrecovered rooster',5]};
   const names = {logan:'Logan',ryan:'Ryan',casey:'Casey',pj:'PJ',astro:'Mickey',mike:'Mike',pops:'Pops'};
   const seenKey = 'pheasant-bird-alerts-v1';
@@ -35,7 +35,7 @@
     try{
       if(!client) {
         if(!window.supabase)return;
-        client=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+        client=window.huntSupabase;if(!client)return;
       }
       const {data,error}=await client.from('pheasant_2026_events').select('id,payload,deleted_at').eq('kind','harvests').is('deleted_at',null).limit(500);
       if(error)throw error;
@@ -44,11 +44,11 @@
         rows.forEach(x=>seen.add(x.id));
         initialized=true;store();return;
       }
-      const current=localStorage.getItem(identityKey);
+      
       rows.reverse().forEach(row=>{
         if(seen.has(row.id))return;
         seen.add(row.id);
-        if(row.payload.hunter!==current)notify(row.payload);
+        notify(row.payload);
       });
       store();
     }catch(e){
