@@ -28,3 +28,13 @@ header .brand strong{overflow-wrap:anywhere}
 .bird-alert{background:#f4c64d;color:#24210f;border:2px solid #a87918;border-radius:12px;padding:15px 16px;box-shadow:0 8px 24px #0009;font:700 14px system-ui,sans-serif;animation:bird-appear .25s ease-out}
 @keyframes bird-appear{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:520px){header{flex-wrap:wrap;gap:8px}#bird-alert-enable{font-size:10px;padding:6px 8px}#bird-alert-stack{top:115px}}
+
+/* Battle Log readability and reliable satellite tile positioning */
+#chronicle-title,#chronicle-body,#chronicle-time{background:#f9f4e8!important;color:#172219!important;border:2px solid #b7a16d!important;font-size:17px!important;line-height:1.5!important;opacity:1!important;-webkit-text-fill-color:#172219!important}
+#chronicle-title::placeholder,#chronicle-body::placeholder{color:#62675d!important;opacity:1!important}
+#chronicle-body{min-height:170px;resize:vertical;padding:14px!important;caret-color:#172219}
+#chronicle-time{min-height:48px}
+#hunt-map{position:relative;overflow:hidden;isolation:isolate}
+#hunt-map .leaflet-pane,#hunt-map .leaflet-tile,#hunt-map .leaflet-marker-icon,#hunt-map .leaflet-marker-shadow,#hunt-map .leaflet-tile-container,#hunt-map .leaflet-pane>svg,#hunt-map .leaflet-pane>canvas{position:absolute;left:0;top:0}
+#hunt-map .leaflet-tile{max-width:none!important;max-height:none!important;width:256px;height:256px}
+#hunt-map .leaflet-container{overflow:hidden}
