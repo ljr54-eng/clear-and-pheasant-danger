@@ -38,3 +38,7 @@ header .brand strong{overflow-wrap:anywhere}
 #hunt-map .leaflet-pane,#hunt-map .leaflet-tile,#hunt-map .leaflet-marker-icon,#hunt-map .leaflet-marker-shadow,#hunt-map .leaflet-tile-container,#hunt-map .leaflet-pane>svg,#hunt-map .leaflet-pane>canvas{position:absolute;left:0;top:0}
 #hunt-map .leaflet-tile{max-width:none!important;max-height:none!important;width:256px;height:256px}
 #hunt-map .leaflet-container{overflow:hidden}
+
+/* Roomy iPhone-friendly Battle Log story editor */
+#chronicle-body{display:block;width:100%;min-height:340px;font-size:20px!important;line-height:1.65!important;padding:20px!important;resize:vertical;box-sizing:border-box;border-radius:12px;}
+#chronicle-body:focus{outline:3px solid #e4bb74;outline-offset:2px;}
